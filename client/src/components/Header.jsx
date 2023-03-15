@@ -1,14 +1,18 @@
-import React from 'react'
-import {PhoneIcon} from '@heroicons/react/24/solid'
+import React from "react";
+// import { PhoneIcon } from "@heroicons/react/24/solid";
 
-const Header = ({chat}) => {
+const Header = ({ chat }) => {
   return (
     <div>
-        <h3>Chat - {chat.title}</h3>
-        <div>{chat.description}</div>
-        <PhoneIcon style={{height:'37px'}}/>
-    </div>
-  )
-}
+      <h3>{chat.title}</h3>
 
-export default Header
+      {chat.description !== "⬅️⬅️⬅️" ?
+      (<p>{chat.description}</p> ):
+      ( <p>no chat selected</p> )
+      }
+      
+    </div>
+  );
+};
+
+export default Header;
