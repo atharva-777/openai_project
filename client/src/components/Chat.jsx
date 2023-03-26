@@ -10,7 +10,7 @@ import StandardMessageForm from "./StandardMessageForm";
 const Chat = () => {
   const chatPrps = useMultiChatLogic(
     import.meta.env.VITE_PROJECT_ID,
-    "Atharva",
+    "testuser",
     "1234"
   );
   return (
@@ -20,11 +20,11 @@ const Chat = () => {
         {...chatPrps}
         style={{ height: "100vh" }}
         renderChatHeader={(chat) => <Header chat={chat} />}
-        renderMessageForm={(props)=>{
-          return(
-            <StandardMessageForm props={props} activeChat = { chatPrps.chat}/>
-          )
-        }}  
+        // renderMessageForm={(props)=>{
+        //   return(
+        //     <StandardMessageForm props={props} activeChat = { chatPrps.chat}/>
+        //     )
+        //   }}  
       />
     </div>
   );
