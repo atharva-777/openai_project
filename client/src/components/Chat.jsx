@@ -14,17 +14,17 @@ const Chat = () => {
     "1234"
   );
   return (
-    <div style={{ flexBasis: "100%" }}>
+    <div style={{ flexBasis: "100vh" }}>
       <MultiChatSocket {...chatPrps} />
       <MultiChatWindow
         {...chatPrps}
         style={{ height: "100vh" }}
         renderChatHeader={(chat) => <Header chat={chat} />}
-        // renderMessageForm={(props)=>{
-        //   return(
-        //     <StandardMessageForm props={props} activeChat = { chatPrps.chat}/>
-        //     )
-        //   }}  
+        renderMessageForm={(props) => {  
+          return (
+            <StandardMessageForm props={props} activeChat={chatPrps.chat} />
+          );
+        }}
       />
     </div>
   );
