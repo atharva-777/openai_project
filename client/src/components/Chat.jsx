@@ -8,21 +8,21 @@ import Header from "./Header";
 import StandardMessageForm from "./StandardMessageForm";
 
 const Chat = () => {
-  const chatPrps = useMultiChatLogic(
+  const chatProps = useMultiChatLogic(
     import.meta.env.VITE_PROJECT_ID,
     "testuser",
     "1234"
   );
   return (
     <div style={{ flexBasis: "100vh" }}>
-      <MultiChatSocket {...chatPrps} />
+      <MultiChatSocket {...chatProps} />
       <MultiChatWindow
-        {...chatPrps}
+        {...chatProps}
         style={{ height: "100vh" }}
         renderChatHeader={(chat) => <Header chat={chat} />}
         renderMessageForm={(props) => {  
           return (
-            <StandardMessageForm props={props} activeChat={chatPrps.chat} />
+            <StandardMessageForm props={props} activeChat={chatProps.chat} />
           );
         }}
       />

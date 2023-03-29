@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { PaperClipIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import {
+  PaperClipIcon,
+  XMarkIcon,
+  PaperAirplaneIcon,
+} from "@heroicons/react/24/solid";
 import Dropzone from "react-dropzone";
 
-const StandardMessageForm = (props) => {
+const StandardMessageForm = ({props,activeChat}) => {
+  
   const [msg, setMsg] = useState("");
   const [attach, setAttach] = useState("");
   const [preview, setPreview] = useState("");
@@ -11,14 +16,34 @@ const StandardMessageForm = (props) => {
     setMsg(e.target.value);
   };
 
+  
+  const handleSubmit = async () => {
+    const date = new Date()
+      .toISOString()
+      .replace("T", " ")
+      .replace("Z", `${Math.floor(Math.random() * 1000)}+00:00`);
+    const at = attach ? [{ blob: attach, file: attach.name }] : [];
+    const form = {
+      attachments: at,
+      created: date,
+      sender_username: props.username,
+      text: msg,
+      activeChatId: activeChat.id,
+    };
+
+    props.onSubmit(form);
+    setMsg("");
+    setAttach("");
+  };
+
   return (
     <div className="message-form-container">
       {preview && (
         <div className="message-form-preview">
           <img
+            alt="message-form-preview"
+            className="message-form-preview-image"
             src={preview}
-            alt="here"
-            className="message-form-preview"
             onLoad={() => URL.revokeObjectURL(preview)}
           />
           <XMarkIcon
@@ -30,33 +55,18 @@ const StandardMessageForm = (props) => {
           />
         </div>
       )}
-      <div className="message-from">
-        <div className="message-from-input-container">
+
+      <div className="message-form">
+        <div className="message-form-input-container">
           <input
             className="message-form-input"
             type={"text"}
             value={msg}
             onChange={handleChange}
-            placeholder={"send a message "}
+            placeholder={"send a message"}
           />
         </div>
         <div className="message-form-icons">
-          {/* <Dropzone
-            acceptedFiles=".jpg,.jpeg,.png"
-            multiple={false}
-            noClick={true}
-            onDrop={(acceptedFiles) => {
-              setAttach(acceptedFiles[0]);
-              setPreview(URL.createObjectURL(acceptedFiles[0]))
-            }}
-          >
-            {({getRootProps,getInputProps,open})=>{
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <PaperClipIcon className="message-form-icon-click" onClick={open}/>
-              </div>
-            }}
-            </Dropzone> */}
           <Dropzone
             acceptedFiles=".jpg,.jpeg,.png"
             multiple={false}
@@ -77,6 +87,13 @@ const StandardMessageForm = (props) => {
             )}
           </Dropzone>
           <hr />
+          <PaperAirplaneIcon
+            className="message-form-icon-airplane"
+            onClick={() => {
+              setPreview("");
+              handleSubmit();
+            }}
+          />
         </div>
       </div>
     </div>

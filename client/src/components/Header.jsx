@@ -1,16 +1,31 @@
 import React from "react";
-// import { PhoneIcon } from "@heroicons/react/24/solid";
+import { ChatBubbleLeftRightIcon, PhoneIcon } from "@heroicons/react/24/solid";
 
 const Header = ({ chat }) => {
   return (
-    <div>
-      <h3>{chat.title}</h3>
+    // <div>
+    //   <h3>{chat.title}</h3>
 
-      {chat.description !== "⬅️⬅️⬅️" ?
-      (<p>{chat.description}</p> ):
-      ( <p>no chat selected</p> )
-      }
-      
+    //   {chat.description !== "⬅️⬅️⬅️" ?
+    //   (<p>{chat.description}</p> ):
+    //   ( <p>no chat selected</p> )
+    //   }
+
+    // </div>
+
+    <div className="chat-header">
+      <div className="flexbetween">
+        <ChatBubbleLeftRightIcon className="icon-chat" />
+        <h3 className="header-text">{chat.title}</h3>
+      </div>
+      <div className="flexbetween">
+        <PhoneIcon className="icon-phone" />
+        {chat.description !== "⬅️ ⬅️ ⬅️" ? (
+          <p className="header-text">{chat.description}</p>
+        ) : (
+          <p className="header-text">no chat selected</p>
+        )}
+      </div>
     </div>
   );
 };
