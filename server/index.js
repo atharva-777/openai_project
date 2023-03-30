@@ -4,6 +4,12 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import helmet from 'helmet'
 import morgan from 'morgan'
+import { Configuration,OpenAIApi } from 'openai'
+
+const configuration = new Configuration({
+  apiKey: process.env.OPEN_API_KEY,
+});
+const openai = new OpenAIApi(configuration)
 
 dotenv.config()
 const app = express()
@@ -21,3 +27,5 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT,()=>{
     console.log(`Listening to port : ${PORT}`)
 })
+
+export {openai}
