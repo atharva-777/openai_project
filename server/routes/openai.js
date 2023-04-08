@@ -9,6 +9,7 @@ const router = express.Router()
 router.post("/text",async (req,res)=>{
     try{
         const {text,activeChatId} = res.body;
+        console.log('text',text)
         res.status(200).json({text})
     }catch{
         console.log("error",error)
