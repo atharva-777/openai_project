@@ -6,8 +6,7 @@ import {
 } from "@heroicons/react/24/solid";
 import Dropzone from "react-dropzone";
 
-const StandardMessageForm = ({props,activeChat}) => {
-  
+const StandardMessageForm = ({ props, activeChat }) => {
   const [msg, setMsg] = useState("");
   const [attach, setAttach] = useState("");
   const [preview, setPreview] = useState("");
@@ -16,7 +15,6 @@ const StandardMessageForm = ({props,activeChat}) => {
     setMsg(e.target.value);
   };
 
-  
   const handleSubmit = async () => {
     const date = new Date()
       .toISOString()

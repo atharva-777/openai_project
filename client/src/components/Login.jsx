@@ -1,47 +1,42 @@
-import {React,useState} from 'react'
+import { React, useState } from "react";
 
 const Login = () => {
+  const [isSubmitted, setSubmitted] = useState(false);
 
-  const [isSubmitted,setSubmitted] = useState(false)
+  const [uname, setuname] = useState("");
+  const [pass, setpass] = useState("");
 
-  const [uname,setuname] = useState('')
-  const [pass,setpass] = useState('')
+  const db = [
+    {
+      username: "atharva",
+      password: "123",
+    },
+    {
+      username: "jack",
+      password: "1234",
+    },
+  ];
 
-  const db = [{
-    username : 'atharva',
-    password : '123'
-  },
-  {
-    username : 'jack',
-    password : '1234'
-  }
-]
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
+    var data = {
+      name: uname,
+      pass: pass,
+    };
 
+    const userData = db.find((user) => user.username === data.name);
 
-const handleSubmit = (event) => {
-  event.preventDefault();
-
-  var data = {
-    name : uname,
-    pass : pass
-  }
-
-  const userData = db.find((user)=>user.username===data.name)
-
-  if(userData){
-    if(userData.password!==data.pass){
-      console.log('wrong password')
-    }else{
-      setSubmitted(true)
+    if (userData) {
+      if (userData.password !== data.pass) {
+        console.log("wrong password");
+      } else {
+        setSubmitted(true);
+      }
+    } else {
+      console.log("wrong username");
     }
-  }else{
-    console.log('wrong username')
-  }
-
-}
-
-
+  };
 
   const renderForm = (
     <div className="form">
@@ -70,7 +65,7 @@ const handleSubmit = (event) => {
           />
         </div>
         <div className="button">
-          <button onClick={(event)=>handleSubmit(event)}>Submit</button>
+          <button onClick={(event) => handleSubmit(event)}>Submit</button>
         </div>
       </form>
     </div>
@@ -82,7 +77,7 @@ const handleSubmit = (event) => {
         {isSubmitted ? <div>Successfully signed in</div> : renderForm}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
