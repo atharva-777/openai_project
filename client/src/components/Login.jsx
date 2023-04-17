@@ -1,81 +1,47 @@
-import { React, useState } from "react";
+import { React, useState ,useEffect } from "react";
+import { usePostLoginMutation,usePostRegisterMutation } from "../store/api";
 
 const Login = () => {
-  const [isSubmitted, setSubmitted] = useState(false);
+  
 
-  const [uname, setuname] = useState("");
-  const [pass, setpass] = useState("");
+  const [isRegister,setIsRegister] = useState(false)
+  const [username,setUsername] = useState("")
+  const [password, setPassword] = useState("");
 
-  const db = [
-    {
-      username: "atharva",
-      password: "123",
-    },
-    {
-      username: "jack",
-      password: "1234",
-    },
-  ];
+  const [triggerLogin,resultLogin] = usePostLoginMutation()
+  const [triggerRegister] = usePostRegisterMutation()
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleLogin = () => {
+    triggerLogin({username,password});
+  }
 
-    var data = {
-      name: uname,
-      pass: pass,
-    };
-
-    const userData = db.find((user) => user.username === data.name);
-
-    if (userData) {
-      if (userData.password !== data.pass) {
-        console.log("wrong password");
-      } else {
-        setSubmitted(true);
-      }
-    } else {
-      console.log("wrong username");
-    }
+  
+  const handleRegister = () => {
+    triggerRegister({ username, password });
   };
 
-  const renderForm = (
-    <div className="form">
-      <form>
-        <div className="input">
-          <label>Username</label>
-          <input
-            type="text"
-            placeholder="Name"
-            onChange={(event) => {
-              setuname(event.target.value);
-            }}
-            required
-          />
-        </div>
+  useEffect(() => {
+    if(resultLogin.data?.response){
+      setUsername(username);
+      setPassword(password);  
+    }
+  
+    return () => {
+      
+    }
+  }, [resultLogin.data]) //eslint-disable-line
+  
 
-        <div className="input">
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={(event) => {
-              setpass(event.target.value);
-            }}
-            required
-          />
-        </div>
-        <div className="button">
-          <button onClick={(event) => handleSubmit(event)}>Submit</button>
-        </div>
-      </form>
-    </div>
-  );
+  
   return (
-    <div>
-      <div className="login-form">
-        <div>Sign In</div>
-        {isSubmitted ? <div>Successfully signed in</div> : renderForm}
+    <div className="login-page">
+      <div className="login-container">
+        <h2 className="title">ChatApp</h2>
+        <p className="register-change" onClick={()=>setIsRegister(!isRegister)}>
+          {isRegister?"Already a user ?":"Are you a new user?"}
+        </p>
       </div>
+      
     </div>
   );
 };

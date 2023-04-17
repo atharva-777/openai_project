@@ -8,11 +8,11 @@ import Header from "./Header";
 import StandardMessageForm from "./StandardMessageForm";
 import Ai from './Ai'
 
-const Chat = () => {
+const Chat = ({user,pass})  => {
   const chatProps = useMultiChatLogic(
     import.meta.env.VITE_PROJECT_ID,
-    "testuser",
-    "1234"
+    user,
+    pass
   );
   return (
     <div style={{ flexBasis: "100vh" }}>
