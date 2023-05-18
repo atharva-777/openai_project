@@ -29,7 +29,7 @@ const Login = ({ setUser, setPass }) => {
   return (
     <div className="login-page">
       <div className="login-container">
-        <h2 className="title">ChatApp</h2>
+        <h2 className="title">Welcome to ChatGenius 💬</h2>
         <p
           className="register-change"
           onClick={() => setIsRegister(!isRegister)}
