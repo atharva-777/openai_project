@@ -13,9 +13,9 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Chat user={user} pass={pass} />} />
-          {/* <Route path="/" element={isAuth? <Navigate to='/chat'/>: <Login setUser={setUser} setPass={setPass}/>} /> */}
-          {/* <Route path="/chat" element={isAuth? <Chat user={user} pass={pass} />:<Navigate to='/'/>} /> */}
+          {/* <Route path="/" element={<Chat user={user} pass={pass} />} /> */}
+          <Route path="/" element={isAuth? <Navigate to='/chat'/>: <Login setUser={setUser} setPass={setPass}/>} />
+          <Route path="/chat" element={isAuth? <Chat user={user} pass={pass} />:<Navigate to='/'/>} />
         </Routes>
       </BrowserRouter>
     </div>

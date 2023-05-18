@@ -11,7 +11,7 @@ import Ai from './Ai'
 const Chat = ({user,pass})  => {
   const chatProps = useMultiChatLogic(
     import.meta.env.VITE_PROJECT_ID,
-    "testuser",
+    "Atharva",
     1234
   );
   return (
